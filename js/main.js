@@ -29,9 +29,10 @@ function randomInt(minInt, maxInt) {
 }
 
 function getArrayRandElement(arr) {
-  var rand = Math.floor((randomInt(MINLIKES, MAXLIKES) / MAXLIKES) * arr.length);
+  var rand = Math.floor(rand = randomInt(0, arr.length));
   return arr[rand];
 }
+
 
 function createArrComments() {
   var generationComment = function () {
@@ -43,26 +44,26 @@ function createArrComments() {
     return comment;
   };
   var arr = [];
-  for (var i = 0; i < randomInt(1, 6); i++) {
+  var maxComments = randomInt(1, 6);
+  for (var i = 0; i < maxComments; i++) {
     arr.push(generationComment());
   }
   return arr;
 }
 
-var generationCard = function () {
+var generationCard = function (number) {
   var card = {
-    url: 'photos/' + randomInt(1, 6) + '.jpg',
+    url: 'photos/' + number + '.jpg',
     likes: randomInt(MINLIKES, MAXLIKES),
     description: getArrayRandElement(DESCRIPTION),
     comments: createArrComments()
   };
-
   return card;
 };
 
 
 for (var i = 0; i < NUMBER_CARDS; i++) {
-  cards.push(generationCard());
+  cards.push(generationCard(i + 1));
 }
 
 
