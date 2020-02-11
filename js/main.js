@@ -29,8 +29,25 @@ function randomInt(minInt, maxInt) {
 }
 
 function getArrayRandElement(arr) {
-  var rand = Math.floor(rand = randomInt(0, arr.length));
+  var rand = randomInt(0, arr.length);
   return arr[rand];
+}
+
+function modRandomInt() {
+  var arrInt = [];
+  var a;
+  var swap;
+  for (var i = 0; i < 25; i++) {
+    arrInt[i] = i + 1;
+  }
+
+  for (var index = arrInt.length - 1; index > 0; index--) {
+    a = Math.floor(Math.random() * (index + 1));
+    swap = arrInt[a];
+    arrInt[a] = arrInt[index];
+    arrInt[index] = swap;
+  }
+  return arrInt;
 }
 
 
@@ -61,9 +78,9 @@ var generationCard = function (number) {
   return card;
 };
 
-
+var arr = modRandomInt();
 for (var i = 0; i < NUMBER_CARDS; i++) {
-  cards.push(generationCard(i + 1));
+  cards.push(generationCard(arr[i]));
 }
 
 
