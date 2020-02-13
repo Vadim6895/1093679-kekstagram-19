@@ -148,11 +148,20 @@ var renderBigCard = function (newCard, picture) {
 renderBigCard(cards[0], bigPicture);
 renderComment(cards[0]);
 
-var socialComentCount = document.querySelector('.social__comment-count');
-socialComentCount.classList.add('hidden');
+function getHiddenSocialComment() {
+  var socialComentCount = document.querySelector('.social__comment-count');
+  socialComentCount.classList.add('hidden');
+}
+function getHiddenCommentsLoader() {
+  var commentsLoader = document.querySelector('.comments-loader');
+  commentsLoader.classList.add('hidden');
+}
 
-var commentsLoader = document.querySelector('.comments-loader');
-commentsLoader.classList.add('hidden');
+function getModalOpen() {
+  var modal = document.querySelector('body');
+  modal.classList.add('modal-open');
+}
 
-var modal = document.querySelector('body');
-modal.classList.add('modal-open');
+getHiddenSocialComment();
+getHiddenCommentsLoader();
+getModalOpen();
