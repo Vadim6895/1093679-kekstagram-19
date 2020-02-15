@@ -106,7 +106,7 @@ generateFragment();
 
 /* MODULE 3 -- TASK 3 (временно)-------------------------------------------- */
 var bigPicture = document.querySelector('.big-picture');
-bigPicture.classList.remove('hidden');
+/* bigPicture.classList.remove('hidden');*/
 
 var renderComment = function (newCard) {
   var commentFragment = document.createDocumentFragment();
@@ -161,7 +161,96 @@ function getModalOpen() {
   var modal = document.querySelector('body');
   modal.classList.add('modal-open');
 }
+function getModalClose() {
+  var modal = document.querySelector('body');
+  modal.classList.remove('modal-open');
+}
 
 getHiddenSocialComment();
 getHiddenCommentsLoader();
-getModalOpen();
+/* getModalOpen();*/
+
+/* MODULE 4 -- TASK 2 (временно)-------------------------------------------- */
+var imgUploadForm = document.querySelector('.img-upload__overlay');
+var imgButtonCancel = document.querySelector('.img-upload__cancel');
+var imgUploadInput = document.querySelector('.img-upload__input');
+var uploadForm = document.querySelector('.img-uploadForm');
+var imgUploadLabel = document.querySelector('.img-upload__label');
+var ESC_KEY = 'Escape';
+
+var onPopupEscPress = function (evt) {
+  if (evt.key === 'Escape') {
+    uploadFormClose();
+  }
+};
+
+function uploadFormOpen() {
+  imgUploadForm.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+  getModalOpen();
+}
+
+function uploadFormClose() {
+  imgUploadForm.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+  getModalClose();
+}
+
+function eventDefault(evt) {
+  evt.preventDefault();
+}
+
+imgUploadLabel.addEventListener('click', function (evt) {
+  eventDefault(evt);
+  uploadFormOpen();
+});
+
+imgButtonCancel.addEventListener('click', function () {
+  uploadFormClose();
+});
+
+/* Масштаб*/
+var smallScaleBtn = document.querySelector('.scale__control--smaller');
+var biggerScaleBtn = document.querySelector('.scale__control--bigger');
+var scaleControlInput = document.querySelector('.scale__control--value');
+var imgUpload = document.querySelector('.img-upload__preview');
+/* var STEP_SCALE = '25'; */
+var STEP_VALUES = ['25', '50', '75', '100'];
+var stepValue = 3;
+scaleControlInput.value = '100%';
+
+function smallScale() {
+  if (scaleControlInput.value === '25%') {
+    scaleControlInput.value = '25%';
+  } else {
+    stepValue--;
+    scaleControlInput.value = STEP_VALUES[stepValue] + '%';
+    imgUpload.style.transform = 'scale(0.' + STEP_VALUES[stepValue] + ')';
+  }
+}
+function biggerScale() {
+  if (scaleControlInput.value === '100%') {
+    scaleControlInput.value = '100%';
+  } else {
+    stepValue++;
+    scaleControlInput.value = STEP_VALUES[stepValue] + '%';
+    if (STEP_VALUES[stepValue] === '100') {
+      imgUpload.style.transform = 'scale(1.0)';
+    } else {
+      imgUpload.style.transform = 'scale(0.' + STEP_VALUES[stepValue] + ')';
+    }
+  }
+}
+
+smallScaleBtn.addEventListener('click', function () {
+  smallScale();
+});
+biggerScaleBtn.addEventListener('click', function () {
+  biggerScale();
+});
+/* Эфекты*/
+var effectsList = document.querySelector('.effects__list');
+effectsList.addEventListener('click', function (evt) {
+  console.log(evt.target.nextElementSibling);
+  /*console.log(evt.target.classList[1]);*/
+});
