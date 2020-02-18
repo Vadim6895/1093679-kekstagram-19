@@ -213,7 +213,7 @@ imgButtonCancel.addEventListener('click', function () {
 var smallScaleBtn = document.querySelector('.scale__control--smaller');
 var biggerScaleBtn = document.querySelector('.scale__control--bigger');
 var scaleControlInput = document.querySelector('.scale__control--value');
-var imgUpload = document.querySelector('.img-upload__preview');
+var imgUploadDiv = document.querySelector('.img-upload__preview');
 /* var STEP_SCALE = '25'; */
 var STEP_VALUES = ['25', '50', '75', '100'];
 var stepValue = 3;
@@ -225,7 +225,7 @@ function smallScale() {
   } else {
     stepValue--;
     scaleControlInput.value = STEP_VALUES[stepValue] + '%';
-    imgUpload.style.transform = 'scale(0.' + STEP_VALUES[stepValue] + ')';
+    imgUploadDiv.style.transform = 'scale(0.' + STEP_VALUES[stepValue] + ')';
   }
 }
 function biggerScale() {
@@ -235,9 +235,9 @@ function biggerScale() {
     stepValue++;
     scaleControlInput.value = STEP_VALUES[stepValue] + '%';
     if (STEP_VALUES[stepValue] === '100') {
-      imgUpload.style.transform = 'scale(1.0)';
+      imgUploadDiv.style.transform = 'scale(1.0)';
     } else {
-      imgUpload.style.transform = 'scale(0.' + STEP_VALUES[stepValue] + ')';
+      imgUploadDiv.style.transform = 'scale(0.' + STEP_VALUES[stepValue] + ')';
     }
   }
 }
@@ -248,9 +248,71 @@ smallScaleBtn.addEventListener('click', function () {
 biggerScaleBtn.addEventListener('click', function () {
   biggerScale();
 });
-/* Эфекты*/
+/* effects--------------------*/
 var effectsList = document.querySelector('.effects__list');
+var imgUpload = document.querySelector('.img-upload__preview').querySelector('img');
+var levelPin = document.querySelector('.effect-level__pin');
+var levelLine = document.querySelector('.effect-level__line');
+var object = {
+  'effect-none': 'effects-preview--none',
+  'effect-chrome': 'effects-preview--chrome',
+  'effect-sepia': 'effects-preview--sepia',
+  'effect-marvin': 'effects-preview--marvin',
+  'effect-phobos': 'effects-preview--phobos',
+  'effect-heat': 'effects-preview--heat'
+};
+
+/* effectsList.addEventListener('click', function (evt) {
+  if (evt.target.type === 'radio') {
+
+  } if (!imgUpload.className) {
+    imgUpload.classList.add(object[evt.target.id]);
+  } else {
+    imgUpload.classList.remove(object[evt.target.id]);
+  }
+});*/
+
 effectsList.addEventListener('click', function (evt) {
-  console.log(evt.target.nextElementSibling);
-  /*console.log(evt.target.classList[1]);*/
+  if (evt.target.type === 'radio') {
+
+    if (!imgUpload.className) {
+      imgUpload.classList.add(object[evt.target.id]);
+    } else {
+      if (imgUpload.className !== evt.target.id) {
+        imgUpload.className = '';
+        imgUpload.classList.add(object[evt.target.id]);
+      } else {
+        imgUpload.className = '';
+      }
+    }
+  }
 });
+levelPin.addEventListener('mouseup', function (evt) {
+ console.log(evt.clientX);
+});
+levelLine.addEventListener('mouseup', function (evt) {
+ console.log(evt.clientX);
+});
+/* хэш теги ------------------------------------------*/
+
+var imgUploadSubmitBtn = document.querySelector('.img-upload__submit');
+var hashtagInput = document.querySelector('.text__hashtags');
+
+imgUploadSubmitBtn.addEventListener('click', function (evt) {
+  eventDefault(evt);
+});
+var names = '#хэш-тег1, #Петя, Маша';
+var arrNames = names.split(', ');
+
+/*for (var index = 0; index < arrNames.length; index++) {
+  console.log(arrNames[index]);
+  for (var a = 0; a < arrNames[index].length; a++) {
+    console.log(arrNames[index][a]);
+    if (arrNames[index][a] === '#') {
+
+    }
+    else {
+
+    }
+  }
+}*/
