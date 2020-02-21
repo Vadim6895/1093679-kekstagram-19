@@ -106,7 +106,6 @@ generateFragment();
 
 /* MODULE 3 -- TASK 3 (временно)-------------------------------------------- */
 var bigPicture = document.querySelector('.big-picture');
-/* bigPicture.classList.remove('hidden');*/
 
 var renderComment = function (newCard) {
   var commentFragment = document.createDocumentFragment();
@@ -167,19 +166,21 @@ function getModalClose() {
 
 getHiddenSocialComment();
 getHiddenCommentsLoader();
-/* getModalOpen();*/
 
 /* MODULE 4 -- TASK 2 (временно)-------------------------------------------- */
+/* Добавлено, удаление пустых строк из массива доп функцией*/
+// подставление верных значений для фильтров
+// очистка кастомной валидации
 var imgUploadForm = document.querySelector('.img-upload__overlay');
 var imgButtonCancel = document.querySelector('.img-upload__cancel');
 var imgUploadInput = document.querySelector('.img-upload__input');
-var uploadForm = document.querySelector('.img-uploadForm');
-var imgUploadLabel = document.querySelector('.img-upload__label');
 var ESC_KEY = 'Escape';
 
 var onPopupEscPress = function (evt) {
   if (evt.key === ESC_KEY) {
-    uploadFormClose();
+    if (evt.target !== hashtagInput) {
+      uploadFormClose();
+    }
   }
 };
 
@@ -195,12 +196,7 @@ function uploadFormClose() {
   getModalClose();
 }
 
-function eventDefault(evt) {
-  evt.preventDefault();
-}
-
-imgUploadInput.addEventListener('change', function (evt) {
-  //eventDefault(evt);
+imgUploadInput.addEventListener('change', function () {
   uploadFormOpen();
 });
 
@@ -263,6 +259,8 @@ var object = {
   'effect-heat': 'effects-preview--heat'
 };
 
+effectLevelSlider.classList.add('hidden'); // т.к. изначально выбран эффект оригинал слайдер скрыт.
+
 effectsList.addEventListener('click', function (evt) {
   if (evt.target.type === 'radio') {
 
@@ -272,9 +270,7 @@ effectsList.addEventListener('click', function (evt) {
     if (imgUpload.className !== evt.target.id) {
       imgUpload.className = '';
       imgUpload.classList.add(object[evt.target.id]);
-    } /* else {
-      imgUpload.className = '';
-    }*/
+    }
     if (imgUpload.className === object['effect-none']) {
       effectLevelSlider.classList.add('hidden');
     } else {
@@ -283,7 +279,7 @@ effectsList.addEventListener('click', function (evt) {
   }
 });
 
-effectsNoneBtn.addEventListener('click', function() {
+effectsNoneBtn.addEventListener('click', function () {
   imgUpload.style.filter = 'grayscale(0.0)';
   imgUpload.style.filter = 'sepia(0.0)';
   imgUpload.style.filter = 'invert(0%)';
@@ -293,6 +289,8 @@ effectsNoneBtn.addEventListener('click', function() {
 
 levelLine.addEventListener('mouseup', function (evt) {
   var saturation = evt.offsetX / levelLine.offsetWidth * 100;
+  var saturationBlur = evt.offsetX / levelLine.offsetWidth * 3;
+  var saturationBrightness = (evt.offsetX / levelLine.offsetWidth * 2) + 1;
 
   if (imgUpload.className === object['effect-chrome']) {
     imgUpload.style.filter = 'grayscale(0.' + Math.floor(saturation) + ')';
@@ -301,67 +299,71 @@ levelLine.addEventListener('mouseup', function (evt) {
     imgUpload.style.filter = 'sepia(0.' + Math.floor(saturation) + ')';
   }
   if (imgUpload.className === object['effect-marvin']) {
-    imgUpload.style.filter = 'invert(' + Math.floor(saturation) + '%)';
+    imgUpload.style.filter = 'invert(' + Math.round(saturation) + '%)';
   }
   if (imgUpload.className === object['effect-phobos']) {
-    imgUpload.style.filter = 'blur(' + Math.floor(saturation) + 'px)';
+    imgUpload.style.filter = 'blur(' + saturationBlur + 'px)';
   }
   if (imgUpload.className === object['effect-heat']) {
-    imgUpload.style.filter = 'brightness(' + Math.floor(saturation) + ')';
+    imgUpload.style.filter = 'brightness(' + saturationBrightness + ')';
   }
 });
 
 /* хэш теги ------------------------------------------*/
-
 var imgUploadSubmitBtn = document.querySelector('.img-upload__submit');
 var hashtagInput = document.querySelector('.text__hashtags');
-// var input = document.getElementById('upload-file');
-// input.remove();
+var regex = /^#[a-zA-Z0-9]+$/;
 
-imgUploadSubmitBtn.addEventListener('click', function (evt) {
-  // eventDefault(evt);
-});
+var isHashTagValid = function (tag) {
+  if (tag.length > 20) {
+    return false;
+  }
 
-hashtagInput.addEventListener('invalid', function () {
-  if (hashtagInput.validity.tooShort) {
-    hashtagInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
-  } else if (hashtagInput.validity.tooLong) {
-    hashtagInput.setCustomValidity('Имя не должно превышать 25-ти символов');
-  } else if (hashtagInput.validity.valueMissing) {
-    hashtagInput.setCustomValidity('Обязательное полеasd');
+  if (regex.test(tag)) {
+    return true;
+  }
+
+  return false;
+};
+
+var cleanTags = function (arrTags) {
+  var tagsArr = [];
+  for (var k = 0; k < arrTags.length; k++) {
+    if (arrTags[k] !== '') {
+      tagsArr.push(arrTags[k]);
+    }
+  }
+  return tagsArr;
+};
+
+var isAllHashTagsValid = function (str) {
+  var tags = str.split(' ');
+  var tagsNoSpaces = cleanTags(tags);
+
+  if (tagsNoSpaces.length > 5) {
+    return false;
+  }
+  for (var index = 0; index < tagsNoSpaces.length; index++) {
+    for (var a = index + 1; a < tagsNoSpaces.length; a++) {
+      if (tagsNoSpaces[index].toLowerCase() === tagsNoSpaces[a].toLowerCase()) {
+        return false;
+      }
+    }
+  }
+
+  for (var g = 0; g < tagsNoSpaces.length; g++) {
+    if (!isHashTagValid(tagsNoSpaces[g])) {
+      return false;
+    }
+  }
+  return true;
+};
+
+
+imgUploadSubmitBtn.addEventListener('click', function () {
+  if (!isAllHashTagsValid(hashtagInput.value)) {
+    hashtagInput.setCustomValidity('Неверный формат тега');
   } else {
     hashtagInput.setCustomValidity('');
   }
 });
-
-hashtagInput.addEventListener('input', function (evt) {
-  var target = evt.target;
-  var targetValue = evt.target.value;
-  var arrTarget = targetValue.split(', '); console.log(arrTarget);
-
-  for (var a = 0; a < arrTarget.length; a++) {
-    if (arrTarget[a] !== '#') {
-      target.setCustomValidity('asdasdsad');
-    } else {
-      target.setCustomValidity('');
-    }
-
-  }
-});
-
-
-// var names = '#хэш-тег1, #Петя, Маша';
-// var arrNames = names.split(', ');
-
-/* for (var index = 0; index < arrNames.length; index++) {
-  console.log(arrNames[index]);
-  for (var a = 0; a < arrNames[index].length; a++) {
-    console.log(arrNames[index][a]);
-    if (arrNames[index][a] === '#') {
-
-    }
-    else {
-        console.log('error');
-    }
-  }
-}*/
