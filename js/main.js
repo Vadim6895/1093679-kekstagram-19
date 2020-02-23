@@ -143,8 +143,8 @@ var renderBigCard = function (newCard, picture) {
 
 };
 
-renderBigCard(cards[0], bigPicture);
-renderComment(cards[0]);
+// renderBigCard(cards[0], bigPicture); // получает обьект(карту) и оверлей, подставляет в оверлей данные из карты
+// renderComment(cards[0]); // получает обьект карту и берет кол-во коментов из обьекта и вставляет случайнные комменты в разметку
 
 function getHiddenSocialComment() {
   var socialComentCount = document.querySelector('.social__comment-count');
@@ -164,8 +164,8 @@ function getModalClose() {
   modal.classList.remove('modal-open');
 }
 
-getHiddenSocialComment();
-getHiddenCommentsLoader();
+getHiddenSocialComment(); // скрывает счетчик комментариев
+getHiddenCommentsLoader(); // скрывает меню "показать больше комментариев"
 
 /* MODULE 4 -- TASK 2 (временно)-------------------------------------------- */
 var imgUploadForm = document.querySelector('.img-upload__overlay');
@@ -275,19 +275,19 @@ effectsList.addEventListener('click', function (evt) {
     }
 
     if (imgUpload.className === object['effect-chrome']) {
-      imgUpload.style.filter = 'grayscale(0.30)';
+      imgUpload.style.filter = 'grayscale(1)';
     }
     if (imgUpload.className === object['effect-sepia']) {
-      imgUpload.style.filter = 'sepia(0.30)';
+      imgUpload.style.filter = 'sepia(1)';
     }
     if (imgUpload.className === object['effect-marvin']) {
-      imgUpload.style.filter = 'invert(30%)';
+      imgUpload.style.filter = 'invert(100%)';
     }
     if (imgUpload.className === object['effect-phobos']) {
       imgUpload.style.filter = 'blur(3px)';
     }
     if (imgUpload.className === object['effect-heat']) {
-      imgUpload.style.filter = 'brightness(1.3)';
+      imgUpload.style.filter = 'brightness(3)';
     }
   }
 });
@@ -376,3 +376,99 @@ imgUploadSubmitBtn.addEventListener('click', function () {
     hashtagInput.setCustomValidity('');
   }
 });
+// MODULE4 --- TASK3 --------------------------------------------//
+// взять общий родительский контейнер и добавить обработчик который будет показывать оверлей по клику
+// передавать данные обьекта на котором произошел клик в оверлей.
+
+// допустим есть массив из 25 элементов
+// каждый обьект ссылается на фото которое не может повторяться у фото есть порядковый номер
+// тогда если получать по клику URL фото с его номером и находить обьект в js с таким же URL фото то можно понять на какой элемент массива произведен клик
+var picContainer = document.querySelector('.pictures');
+var btnCancelBigPic = document.querySelector('.big-picture__cancel');
+// var ENTER_KEY = 'Enter';
+
+function findJsElement(imgsrc) {
+  var d = imgsrc.split('/');
+  var f = [];
+
+  for (i = 0; i < d.length; i++) {
+    if (d[i] === 'photos') {
+      f.push(d[i]);
+      f.push(d[i + 1]);
+    }
+  }
+  var g = f.join('/');
+  for (var l = 0; l < cards.length; l++) {
+    if (g === cards[l].url) {
+      // console.log(cards[l].url);
+      renderBigCard(cards[l], bigPicture);
+      renderComment(cards[l]);
+      openOverlayPicture();
+    }
+  }
+}
+
+var s = 0;
+function tagTarget(evt) {
+
+  if (s === evt.target.src) {
+    openOverlayPicture();
+  } else {
+    if (evt.target.tagName === 'IMG') {
+      s = evt.target.src;
+      findJsElement(s);
+    }
+  }
+  if (evt.target.tagName === 'A') {
+    var p = evt.target.querySelector('img').src;
+    findJsElement(p);
+  }
+}
+// это работает, однако...
+// если подумать то target.src возвращает локальный путь до фото
+// тоесть это может привести к ошибке если в локальном пути будет папка 'photos' а значит решение не верное.
+// тогда как получить чистое значение из src в теге имг ?
+
+// также функция renderComment бесконечно вставляет комменты в оверлей
+// когда я её писал не знал о том что оверлей будет показан один и тот же.
+// нужно ли переписывать данную функцию которая перед вставкой будет чистить комменты ?
+
+picContainer.addEventListener('click', function (evt) {
+  tagTarget(evt);
+
+});
+
+btnCancelBigPic.addEventListener('click', function () {
+  closeOverlayPicture();
+});
+
+var onOverlayEscPress = function (evt) {
+  if (evt.key === ESC_KEY) {
+    closeOverlayPicture();
+  }
+};
+
+/* var onPicContainerEntPress = function (evt) {
+  if (evt.key === ENTER_KEY) {
+    findJsElement();
+    openOverlayPicture();
+  }
+};*/
+
+function openOverlayPicture() {
+  bigPicture.classList.remove('hidden');
+  picContainer.addEventListener('keydown', onOverlayEscPress);
+}
+
+function closeOverlayPicture() {
+  bigPicture.classList.add('hidden');
+  picContainer.removeEventListener('keydown', onOverlayEscPress);
+
+}
+
+/* picContainer.addEventListener('keydown', function (evt) {
+  if (onPicContainerEntPress(evt)) {
+
+  }
+});*/
+// picContainer.addEventListener('keydown', onPicContainerEntPress);
