@@ -168,9 +168,6 @@ getHiddenSocialComment();
 getHiddenCommentsLoader();
 
 /* MODULE 4 -- TASK 2 (временно)-------------------------------------------- */
-/* Добавлено, удаление пустых строк из массива доп функцией*/
-// подставление верных значений для фильтров
-// очистка кастомной валидации
 var imgUploadForm = document.querySelector('.img-upload__overlay');
 var imgButtonCancel = document.querySelector('.img-upload__cancel');
 var imgUploadInput = document.querySelector('.img-upload__input');
@@ -259,7 +256,7 @@ var object = {
   'effect-heat': 'effects-preview--heat'
 };
 
-effectLevelSlider.classList.add('hidden'); // т.к. изначально выбран эффект оригинал слайдер скрыт.
+effectLevelSlider.classList.add('hidden');
 
 effectsList.addEventListener('click', function (evt) {
   if (evt.target.type === 'radio') {
@@ -276,15 +273,27 @@ effectsList.addEventListener('click', function (evt) {
     } else {
       effectLevelSlider.classList.remove('hidden');
     }
+
+    if (imgUpload.className === object['effect-chrome']) {
+      imgUpload.style.filter = 'grayscale(0.30)';
+    }
+    if (imgUpload.className === object['effect-sepia']) {
+      imgUpload.style.filter = 'sepia(0.30)';
+    }
+    if (imgUpload.className === object['effect-marvin']) {
+      imgUpload.style.filter = 'invert(30%)';
+    }
+    if (imgUpload.className === object['effect-phobos']) {
+      imgUpload.style.filter = 'blur(3px)';
+    }
+    if (imgUpload.className === object['effect-heat']) {
+      imgUpload.style.filter = 'brightness(1.3)';
+    }
   }
 });
 
 effectsNoneBtn.addEventListener('click', function () {
-  imgUpload.style.filter = 'grayscale(0.0)';
-  imgUpload.style.filter = 'sepia(0.0)';
-  imgUpload.style.filter = 'invert(0%)';
-  imgUpload.style.filter = 'blur(0px)';
-  imgUpload.style.filter = 'brightness(1)';
+  imgUpload.style = '';
 });
 
 levelLine.addEventListener('mouseup', function (evt) {
