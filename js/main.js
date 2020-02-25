@@ -84,20 +84,20 @@ for (var i = 0; i < NUMBER_CARDS; i++) {
 }
 
 
-var renderCard = function (card) {
+var renderCard = function (card, index) {
   var pictureNode = pictureTemplate.cloneNode(true);
 
   pictureNode.querySelector(PICTURE_COMMENTS).textContent = card.comments.length;
   pictureNode.querySelector(PICTURE_IMG).src = card.url;
   pictureNode.querySelector(PICTURE_LIKES).textContent = card.likes;
-
+  pictureNode.querySelector('.picture').dataset.index = index;
   return pictureNode;
 };
 
 var generateFragment = function () {
   var fragment = document.createDocumentFragment();
   for (var index = 0; index < cards.length; index++) {
-    fragment.appendChild(renderCard(cards[index]));
+    fragment.appendChild(renderCard(cards[index], index));
   }
 
   pictureContainer.appendChild(fragment);
@@ -175,7 +175,7 @@ var ESC_KEY = 'Escape';
 
 var onPopupEscPress = function (evt) {
   if (evt.key === ESC_KEY) {
-    if (evt.target !== hashtagInput) {
+    if (evt.target !== hashtagInput && evt.target !== commentInput) {
       uploadFormClose();
     }
   }
@@ -321,6 +321,7 @@ levelLine.addEventListener('mouseup', function (evt) {
 /* хэш теги ------------------------------------------*/
 var imgUploadSubmitBtn = document.querySelector('.img-upload__submit');
 var hashtagInput = document.querySelector('.text__hashtags');
+var commentInput = document.querySelector('.text__description');
 var regex = /^#[a-zA-Z0-9]+$/;
 
 var isHashTagValid = function (tag) {
@@ -368,6 +369,14 @@ var isAllHashTagsValid = function (str) {
   return true;
 };
 
+var isCommentValid = function (comment) {
+  var commentArr = comment.split('');
+  if (commentArr.length > 140) {
+    return false;
+  }
+  return true;
+};
+
 
 imgUploadSubmitBtn.addEventListener('click', function () {
   if (!isAllHashTagsValid(hashtagInput.value)) {
@@ -375,67 +384,35 @@ imgUploadSubmitBtn.addEventListener('click', function () {
   } else {
     hashtagInput.setCustomValidity('');
   }
+
+  if (!isCommentValid(commentInput.value)) {
+    commentInput.setCustomValidity('Длина комментария слишком большая');
+  } else {
+    commentInput.setCustomValidity('');
+  }
+
 });
 // MODULE4 --- TASK3 --------------------------------------------//
 // взять общий родительский контейнер и добавить обработчик который будет показывать оверлей по клику
 // передавать данные обьекта на котором произошел клик в оверлей.
 
-// допустим есть массив из 25 элементов
-// каждый обьект ссылается на фото которое не может повторяться у фото есть порядковый номер
-// тогда если получать по клику URL фото с его номером и находить обьект в js с таким же URL фото то можно понять на какой элемент массива произведен клик
+
 var picContainer = document.querySelector('.pictures');
 var btnCancelBigPic = document.querySelector('.big-picture__cancel');
 // var ENTER_KEY = 'Enter';
-
-function findJsElement(imgsrc) {
-  var d = imgsrc.split('/');
-  var f = [];
-
-  for (i = 0; i < d.length; i++) {
-    if (d[i] === 'photos') {
-      f.push(d[i]);
-      f.push(d[i + 1]);
-    }
-  }
-  var g = f.join('/');
-  for (var l = 0; l < cards.length; l++) {
-    if (g === cards[l].url) {
-      // console.log(cards[l].url);
-      renderBigCard(cards[l], bigPicture);
-      renderComment(cards[l]);
-      openOverlayPicture();
-    }
-  }
-}
-
-var s = 0;
-function tagTarget(evt) {
-
-  if (s === evt.target.src) {
-    openOverlayPicture();
-  } else {
-    if (evt.target.tagName === 'IMG') {
-      s = evt.target.src;
-      findJsElement(s);
-    }
-  }
-  if (evt.target.tagName === 'A') {
-    var p = evt.target.querySelector('img').src;
-    findJsElement(p);
-  }
-}
-// это работает, однако...
-// если подумать то target.src возвращает локальный путь до фото
-// тоесть это может привести к ошибке если в локальном пути будет папка 'photos' а значит решение не верное.
-// тогда как получить чистое значение из src в теге имг ?
-
-// также функция renderComment бесконечно вставляет комменты в оверлей
-// когда я её писал не знал о том что оверлей будет показан один и тот же.
-// нужно ли переписывать данную функцию которая перед вставкой будет чистить комменты ?
-
+// как открывается оверлей при нажатии Enter тоже неясно, опять магия
+// удаление старых комментариев тоже не получается написать
 picContainer.addEventListener('click', function (evt) {
-  tagTarget(evt);
 
+  if (evt.target.type === 'file') {
+    console.log('if');
+  } else {
+    console.log('else');
+    var a = evt.target.closest('A').dataset.index;
+    renderBigCard(cards[a], bigPicture);
+    renderComment(cards[a]);
+    openOverlayPicture();
+  }
 });
 
 btnCancelBigPic.addEventListener('click', function () {
@@ -465,10 +442,4 @@ function closeOverlayPicture() {
   picContainer.removeEventListener('keydown', onOverlayEscPress);
 
 }
-
-/* picContainer.addEventListener('keydown', function (evt) {
-  if (onPicContainerEntPress(evt)) {
-
-  }
-});*/
 // picContainer.addEventListener('keydown', onPicContainerEntPress);
