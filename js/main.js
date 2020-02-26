@@ -393,22 +393,21 @@ imgUploadSubmitBtn.addEventListener('click', function () {
 
 });
 // MODULE4 --- TASK3 --------------------------------------------//
-// взять общий родительский контейнер и добавить обработчик который будет показывать оверлей по клику
-// передавать данные обьекта на котором произошел клик в оверлей.
-
-
 var picContainer = document.querySelector('.pictures');
 var btnCancelBigPic = document.querySelector('.big-picture__cancel');
-// var ENTER_KEY = 'Enter';
-// как открывается оверлей при нажатии Enter тоже неясно, опять магия
-// удаление старых комментариев тоже не получается написать
+
+function deleteComments() {
+  var socialComments = document.querySelector('.social__comments');
+  while (socialComments.firstChild) {
+    socialComments.removeChild(socialComments.firstChild);
+  }
+}
+
 picContainer.addEventListener('click', function (evt) {
 
-  if (evt.target.type === 'file') {
-    console.log('if');
-  } else {
-    console.log('else');
+  if (evt.target.closest('A')) {
     var a = evt.target.closest('A').dataset.index;
+    deleteComments();
     renderBigCard(cards[a], bigPicture);
     renderComment(cards[a]);
     openOverlayPicture();
@@ -425,13 +424,6 @@ var onOverlayEscPress = function (evt) {
   }
 };
 
-/* var onPicContainerEntPress = function (evt) {
-  if (evt.key === ENTER_KEY) {
-    findJsElement();
-    openOverlayPicture();
-  }
-};*/
-
 function openOverlayPicture() {
   bigPicture.classList.remove('hidden');
   picContainer.addEventListener('keydown', onOverlayEscPress);
@@ -440,6 +432,13 @@ function openOverlayPicture() {
 function closeOverlayPicture() {
   bigPicture.classList.add('hidden');
   picContainer.removeEventListener('keydown', onOverlayEscPress);
-
 }
-// picContainer.addEventListener('keydown', onPicContainerEntPress);
+
+// var ENTER_KEY = 'Enter';
+/* var onPicContainerEntPress = function (evt) {
+  if (evt.key === ENTER_KEY) {
+    findJsElement();
+    openOverlayPicture();
+  }
+};*/
+// picContainer.addEventListener('keydown', onPicContainerEntPress)
