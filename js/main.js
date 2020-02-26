@@ -395,6 +395,7 @@ imgUploadSubmitBtn.addEventListener('click', function () {
 // MODULE4 --- TASK3 --------------------------------------------//
 var picContainer = document.querySelector('.pictures');
 var btnCancelBigPic = document.querySelector('.big-picture__cancel');
+var bodyContainer = document.querySelector('BODY');
 
 function deleteComments() {
   var socialComments = document.querySelector('.social__comments');
@@ -426,12 +427,12 @@ var onOverlayEscPress = function (evt) {
 
 function openOverlayPicture() {
   bigPicture.classList.remove('hidden');
-  picContainer.addEventListener('keydown', onOverlayEscPress);
+  bodyContainer.addEventListener('keydown', onOverlayEscPress);
 }
 
 function closeOverlayPicture() {
   bigPicture.classList.add('hidden');
-  picContainer.removeEventListener('keydown', onOverlayEscPress);
+  bodyContainer.removeEventListener('keydown', onOverlayEscPress);
 }
 
 // var ENTER_KEY = 'Enter';
