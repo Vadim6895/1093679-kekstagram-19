@@ -11,6 +11,10 @@
     commentsLoader.classList.add('hidden');
   }
 
-  getHiddenSocialComment(); // скрывает счетчик комментариев
-  getHiddenCommentsLoader(); // скрывает меню "показать больше комментариев"
+  // getHiddenSocialComment(); // скрывает счетчик комментариев
+  // getHiddenCommentsLoader(); // скрывает меню "показать больше комментариев"
+  window.hiddenComments = {
+    getHiddenSocialComment: getHiddenSocialComment,
+    getHiddenCommentsLoader: getHiddenCommentsLoader
+  };
 })();

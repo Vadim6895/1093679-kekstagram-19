@@ -2,9 +2,10 @@
 
 (function () {
 /* MODULE 3 -- TASK 3 (временно)-------------------------------------------- */
+  // var renderOverlayCards = function () {
   var bigPicture = document.querySelector('.big-picture');
 
-  window.renderComment = function (newCard) { // получает обьект карту и берет кол-во коментов из обьекта и вставляет случайнные комменты в разметку\
+  var renderComment = function (newCard) { // получает обьект карту и берет кол-во коментов из обьекта и вставляет случайнные комменты в разметку\
     var commentFragment = document.createDocumentFragment();
     var commentHTML = document.querySelector('.social__comments');
 
@@ -32,11 +33,15 @@
     }
   };
 
-  window.renderBigCard = function (newCard, picture) { // получает обьект(карту) и оверлей, подставляет в оверлей данные из карты
+  var renderBigCard = function (newCard, picture) { // получает обьект(карту) и оверлей, подставляет в оверлей данные из карты
     bigPicture = picture;
     bigPicture.querySelector('.big-picture__img').querySelector('img').src = newCard.url;
     bigPicture.querySelector('.likes-count').textContent = newCard.likes;
     bigPicture.querySelector('.comments-count').textContent = newCard.comments.length;
   };
-
+  // };
+  window.renderOverlayCards = {
+    renderComment: renderComment,
+    renderBigCard: renderBigCard
+  };
 })();
