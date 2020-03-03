@@ -6,7 +6,7 @@
     var levelPinSlider = document.querySelector('.effect-level__pin');
     var effectLevelDepth = document.querySelector('.effect-level__depth');
     var levelLine = document.querySelector('.effect-level__line');
-    // uploadFormOpen();
+
     levelPinSlider.addEventListener('mousedown', function (evt) {
       evt.preventDefault();
 
