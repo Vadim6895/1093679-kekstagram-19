@@ -43,7 +43,7 @@
     });
   };
   var removeSlider = function () {
-    window.util.levelPinSlider.removeEventListener('click', function () {});
+    window.util.levelPinSlider.removeEventListener('click');
   };
 
   window.uploadFormSlider = {

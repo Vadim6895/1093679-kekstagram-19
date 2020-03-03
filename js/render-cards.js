@@ -15,7 +15,6 @@
     var MINLIKES = 15;
     var MAXLIKES = 200;
 
-
     var PICTUREID = '#picture';
     var PICTURESCLASS = '.pictures';
     var PICTURE_COMMENTS = '.picture__comments';
@@ -81,11 +80,19 @@
       return card;
     };
 
-    var arr = modRandomInt(); //  создает готовый массив из 25 карточек, заполненный случайно
-    for (var i = 0; i < NUMBER_CARDS; i++) {
-      cardsArr.push(generationCard(arr[i]));
-    }
+    // var arr = modRandomInt(); //  создает готовый массив из 25 карточек, заполненный случайно
+    // for (var i = 0; i < NUMBER_CARDS; i++) {
+    // cardsArr.push(generationCard(arr[i]));
+    // }
 
+    var generateCards = function (cards) {
+      var arr = modRandomInt();
+
+      for (var i = 0; i < NUMBER_CARDS; i++) {
+        cards.push(generationCard(arr[i]));
+      }
+    };
+    generateCards(cardsArr);
 
     var renderCard = function (card, index) { // отвечает за перенос данных в html из JS получает карту и индекс
       var pictureNode = pictureTemplate.cloneNode(true);
@@ -107,6 +114,7 @@
     };
     generateFragment();
   };
+
 
   window.renderCards = {
     renderCardsAndComments: renderCardsAndComments

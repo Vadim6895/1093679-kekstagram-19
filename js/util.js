@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  // var cards = [];
   var ESC_KEY = 'Escape';
   var isEscPressed = function (evt) {
     return evt.key === ESC_KEY;
@@ -21,8 +20,8 @@
 
   var levelPinSlider = document.querySelector('.effect-level__pin');
 
+
   window.util = {
-  //  cards: cards,
     hashtagInput: hashtagInput,
     commentInput: commentInput,
     isEscPressed: isEscPressed,

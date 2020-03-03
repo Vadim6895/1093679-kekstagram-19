@@ -3,9 +3,9 @@
 (function () {
 /* effects--------------------*/
   var addEffects = function () {
-    var effectsList = document.querySelector('.effects__list');
+    // var effectsList = document.querySelector('.effects__list');
     var imgUpload = document.querySelector('.img-upload__preview').querySelector('img');
-    var levelLine = document.querySelector('.effect-level__line');
+    // var levelLine = document.querySelector('.effect-level__line');
     // var effectsNoneBtn = document.querySelector('.effects__preview--none');
     var effectLevelSlider = document.querySelector('.effect-level');
 
@@ -20,7 +20,7 @@
 
     effectLevelSlider.classList.add('hidden');
 
-    effectsList.addEventListener('click', function (evt) {
+    window.util.effectsList.addEventListener('click', function (evt) {
       if (evt.target.type === 'radio') {
 
         if (!imgUpload.className) {
@@ -61,10 +61,10 @@
     // imgUpload.style = '';
     // });
 
-    levelLine.addEventListener('mouseup', function (evt) {
-      var saturation = evt.offsetX / levelLine.offsetWidth * 100;
-      var saturationBlur = evt.offsetX / levelLine.offsetWidth * 3;
-      var saturationBrightness = (evt.offsetX / levelLine.offsetWidth * 2) + 1;
+    window.util.levelLine.addEventListener('mouseup', function (evt) {
+      var saturation = evt.offsetX / window.util.levelLine.offsetWidth * 100;
+      var saturationBlur = evt.offsetX / window.util.levelLine.offsetWidth * 3;
+      var saturationBrightness = (evt.offsetX / window.util.levelLine.offsetWidth * 2) + 1;
 
       if (imgUpload.className === object['effect-chrome']) {
         imgUpload.style.filter = 'grayscale(0.' + Math.floor(saturation) + ')';
@@ -85,10 +85,9 @@
   };
 
   var removeEffects = function () {
-    window.util.effectsList.removeEventListener('click', function () {});
-    window.util.effectsNoneBtn.removeEventListener('click', function () {});
-    window.util.levelLine.removeEventListener('click', function () {});
-    // здесь я попытался избежать дублирования кода, однако не уверен в таком решении
+    window.util.effectsList.removeEventListener('click');
+    window.util.effectsNoneBtn.removeEventListener('click');
+    window.util.levelLine.removeEventListener('click');
   };
 
   window.uploadFormEffects = {

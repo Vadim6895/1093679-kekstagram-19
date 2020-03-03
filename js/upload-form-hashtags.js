@@ -75,7 +75,7 @@
     });
   };
   var removeHashtags = function () {
-    window.util.imgUploadSubmitBtn.removeEventListener('click', function () {});
+    window.util.imgUploadSubmitBtn.removeEventListener('click');
   };
   window.uploadFormHashtags = {
     addHashtags: addHashtags,

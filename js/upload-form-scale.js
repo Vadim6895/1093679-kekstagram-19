@@ -42,8 +42,8 @@
     });
   };
   var removeScale = function () {
-    window.util.smallScaleBtn.removeEventListener('click', function () {});
-    window.util.smallScaleBtn.removeEventListener('click', function () {});
+    window.util.smallScaleBtn.removeEventListener('click');
+    window.util.smallScaleBtn.removeEventListener('click');
   };
   window.uploadFormScale = {
     addScale: addScale,

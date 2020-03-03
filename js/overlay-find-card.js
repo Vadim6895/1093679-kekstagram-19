@@ -46,7 +46,7 @@
       bodyContainer.removeEventListener('keydown', onOverlayEscPress);
     }
   };
-  window.OverlayfindCard = {
+  window.overlayfindCard = {
     getOverlayCard: getOverlayCard
   };
 })();

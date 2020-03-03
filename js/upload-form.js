@@ -46,7 +46,7 @@
       window.uploadFormScale.removeScale();
       window.uploadFormHashtags.removeHashtags();
       window.uploadFormSlider.removeSlider();
-      imgButtonCancel.removeEventListener('click', function () {});
+      imgButtonCancel.removeEventListener('click');
     });
   };
   window.uploadForm = {
