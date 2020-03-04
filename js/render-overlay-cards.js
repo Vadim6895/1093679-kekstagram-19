@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-/* MODULE 3 -- TASK 3 (временно)-------------------------------------------- */
-  // var renderOverlayCards = function () {
   var bigPicture = document.querySelector('.big-picture');
 
   var renderComment = function (newCard) { // получает обьект карту и берет кол-во коментов из обьекта и вставляет случайнные комменты в разметку\
@@ -22,7 +20,7 @@
 
       var ptag = document.createElement('p');
       ptag.className = 'social__text';
-      ptag.textContent = newCard.comments[index].comments;
+      ptag.textContent = newCard.comments[index].message;
 
       var cardDescription = document.querySelector('.social__caption');
       cardDescription.textContent = newCard.description;
@@ -39,7 +37,7 @@
     bigPicture.querySelector('.likes-count').textContent = newCard.likes;
     bigPicture.querySelector('.comments-count').textContent = newCard.comments.length;
   };
-  // };
+
   window.renderOverlayCards = {
     renderComment: renderComment,
     renderBigCard: renderBigCard
