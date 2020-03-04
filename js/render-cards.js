@@ -22,19 +22,20 @@
       pictureNode.querySelector('.picture').dataset.index = index;
       return pictureNode;
     };
-
+window.dataServer(function (cardsArr1) {
     var generateFragment = function () { // вставляет массив карт в разметку посредством множественного вызова рендера карты
       var fragment = document.createDocumentFragment();
-      for (var index = 0; index < cardsArr.length; index++) {
-        fragment.appendChild(renderCard(cardsArr[index], index));
+      for (var index = 0; index < cardsArr1.length; index++) {
+        fragment.appendChild(renderCard(cardsArr1[index], index));
       }
 
       pictureContainer.appendChild(fragment);
     };
     generateFragment();
-
+}); //
   };
   window.renderCards = {
     renderCards: renderCards
   };
+
 })();
