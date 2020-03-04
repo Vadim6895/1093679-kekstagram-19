@@ -2,18 +2,17 @@
 
 (function () {
 /* effects--------------------*/
+  var MAX_VALUE_LEVELINE = '452px';
+  var MAX_LEVEL_DEPTH = '100%';
   var addEffects = function () {
     // var effectsList = document.querySelector('.effects__list');
     var imgUpload = document.querySelector('.img-upload__preview').querySelector('img');
     // var levelLine = document.querySelector('.effect-level__line');
     // var effectsNoneBtn = document.querySelector('.effects__preview--none');
     var effectLevelSlider = document.querySelector('.effect-level');
-    var imgOverlay = document.querySelector('.img-upload__overlay');
+    // var imgOverlay = document.querySelector('.img-upload__overlay');
     var effectLevelDepth = document.querySelector('.effect-level__depth');
-    var MAX_VALUE_LEVELINE = '452px';
-    var MAX_LEVEL_DEPTH = '100%';
-    // поскольку levelLine.offsetWidth при заданном display: none имеет значение 0, и ломает всю логику
-    // заранее установленные константы кажутся адекватным решением :)
+
     var object = {
       'effect-none': 'effects-preview--none',
       'effect-chrome': 'effects-preview--chrome',
@@ -66,7 +65,7 @@
       }
     });
 
-    function cleanDataPinSlider(stroke) {
+    /* function cleanDataPinSlider(stroke) {
       var arr = [];
       arr = stroke.split('');
       var arr1 = [];
@@ -77,11 +76,12 @@
       }
       var str = arr1.join('');
       return str;
-    }
+    } */
 
 
-    imgOverlay.addEventListener('mousemove', function () {
-      var dataPinSlider = cleanDataPinSlider(window.util.levelPinSlider.style.left);
+    window.util.imgOverlay.addEventListener('mousemove', function () {
+      // var dataPinSlider = cleanDataPinSlider(window.util.levelPinSlider.style.left);
+      var dataPinSlider = window.util.levelPinSlider.offsetLeft;
       var levelLineWidth = window.util.levelLine.offsetWidth;
       var saturation = (dataPinSlider / levelLineWidth) * 10;
       var saturationInvert = (dataPinSlider / levelLineWidth) * 100;
@@ -113,6 +113,7 @@
     window.util.effectsList.removeEventListener('click');
     window.util.effectsNoneBtn.removeEventListener('click');
     window.util.levelLine.removeEventListener('click');
+    window.util.imgOverlay.removeEventListener('mousemove');
   };
 
   window.uploadFormEffects = {

@@ -19,7 +19,7 @@
   var imgUploadSubmitBtn = document.querySelector('.img-upload__submit');
 
   var levelPinSlider = document.querySelector('.effect-level__pin');
-
+  var imgOverlay = document.querySelector('.img-upload__overlay');
 
   window.util = {
     hashtagInput: hashtagInput,
@@ -31,6 +31,7 @@
     smallScaleBtn: smallScaleBtn,
     biggerScaleBtn: biggerScaleBtn,
     imgUploadSubmitBtn: imgUploadSubmitBtn,
-    levelPinSlider: levelPinSlider
+    levelPinSlider: levelPinSlider,
+    imgOverlay: imgOverlay
   };
 })();

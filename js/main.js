@@ -2,7 +2,8 @@
 (function () {
   var cards = [];
 
-  window.renderCards.renderCardsAndComments(cards);// генерирует и сразу вставляет карточки
+  window.generateCards.generateCardsAndComments(cards);// генерирует и сразу вставляет карточки
+  window.renderCards.renderCards(cards);
   // window.renderOverlay.renderOverlayCards(); // получает карту и вставляет её в оверлей
 
   window.hiddenComments.getHiddenSocialComment();
