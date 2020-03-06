@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-// MODULE4 --- TASK3 --------------------------------------------//
+
   var getOverlayCard = function (cardsArr) {
     var picContainer = document.querySelector('.pictures');
     var btnCancelBigPic = document.querySelector('.big-picture__cancel');
@@ -26,9 +26,6 @@
       }
     });
 
-    btnCancelBigPic.addEventListener('click', function () {
-      closeOverlayPicture();
-    });
 
     var onOverlayEscPress = function () {
       if (window.util.isEscPressed) {
@@ -39,11 +36,13 @@
     function openOverlayPicture() {
       bigPicture.classList.remove('hidden');
       bodyContainer.addEventListener('keydown', onOverlayEscPress);
+      btnCancelBigPic.addEventListener('click', closeOverlayPicture);
     }
 
     function closeOverlayPicture() {
       bigPicture.classList.add('hidden');
       bodyContainer.removeEventListener('keydown', onOverlayEscPress);
+      btnCancelBigPic.removeEventListener('click', closeOverlayPicture);
     }
   };
   window.overlayfindCard = {

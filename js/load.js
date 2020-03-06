@@ -1,11 +1,11 @@
 'use strict';
 
 (function () {
-
-  window.dataServer = function (onSucess) {
+  var URL = 'https://js.dump.academy/kekstagram/data';
+  window.load = function (onSucess) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
-    xhr.open('GET', 'https://js.dump.academy/kekstagram/data');
+    xhr.open('GET', URL);
 
     xhr.addEventListener('load', function () {
       onSucess(xhr.response);
