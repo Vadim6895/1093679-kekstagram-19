@@ -81,7 +81,7 @@
     pictures.appendChild(success);
     success.classList.add('visually-hidden');
 
-    var errorMessage = function () {
+    /* var errorMessage = function () {
       error.classList.remove('visually-hidden');
       error.addEventListener('click', function () {
         error.classList.add('visually-hidden');
@@ -102,9 +102,35 @@
         if (window.util.isEscPressed) {
           success.classList.add('visually-hidden');
         }
-      });
+      });*/
+
+    var onClick = function () {
+      error.classList.add('visually-hidden');
+      success.classList.add('visually-hidden');
+      error.removeEventListener('click', onClick);
+      success.removeEventListener('click', onClick);
     };
 
+    var onKeyDown = function () {
+      if (window.util.isEscPressed) {
+        success.classList.add('visually-hidden');
+        error.classList.add('visually-hidden');
+        document.removeEventListener('keydown', onKeyDown);
+      }
+    };
+
+
+    var successMessage = function () {
+      success.classList.remove('visually-hidden');
+      success.addEventListener('click', onClick);
+      document.addEventListener('keydown', onKeyDown);
+    };
+
+    var errorMessage = function () {
+      error.classList.remove('visually-hidden');
+      error.addEventListener('click', onClick);
+      document.addEventListener('keydown', onKeyDown);
+    };
     // ----------------------------------------------------------
   };
 
