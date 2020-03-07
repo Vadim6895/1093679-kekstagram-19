@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var myFunc = function (cardsArr) {
+  var addFiltersCards = function (cardsArr) {
     var MAX_RANDOM_CARDS = 10;
     var MIN_CARDS = 1;
     // var MAX_CARDS = 25;
@@ -91,7 +91,7 @@
 
   };
   window.filtersCards = {
-    myFunc: myFunc
+    addFiltersCards: addFiltersCards
   };
 
 })();
