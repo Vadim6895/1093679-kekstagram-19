@@ -4,6 +4,7 @@
   window.load(function (cards) {
     window.renderCards.renderCards(cards);
     window.overlayfindCard.getOverlayCard(cards);
+    window.filtersCards.myFunc(cards);
   });
   // window.generateCards.generateCardsAndComments(cards);// генерирует и сразу вставляет карточки
   // window.renderCards.renderCards();
@@ -20,5 +21,4 @@
 
   // window.overlayfindCard.getOverlayCard(cards); // отвечает за чистку коментариев, и определяет на какой карте клик
   // window.renderCards.renderCards(cards);
-
 })();
