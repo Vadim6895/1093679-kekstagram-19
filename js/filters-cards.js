@@ -87,7 +87,6 @@
     });
 
     filtersForm.addEventListener('click', addActiveFilter);
-    // ------------------------------------------------------------
 
 
   };
