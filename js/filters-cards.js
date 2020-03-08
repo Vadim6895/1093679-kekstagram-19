@@ -58,17 +58,7 @@
       var newCards = cardsArr.slice(0, cardsArr.length);
 
       var companare = function (a, b) {
-        if (a.comments.length < b.comments.length) {
-          return 1;
-        }
-        if (a.comments.length === b.comments.length) {
-          return 0;
-        }
-        if (a.comments.length > b.comments.length) {
-          return -1;
-        } else {
-          return undefined;
-        }
+        return b.comments.length - a.comments.length;
       };
 
       newCards.sort(companare);
@@ -78,12 +68,17 @@
     filterDefault.addEventListener('click', function () {
       deleteCards();
       window.renderCards.renderCards(cardsArr);
+      window.overlayfindCard.getOverlayCard(cardsArr);
     });
     filterRandom.addEventListener('click', function () {
-      window.renderCards.renderCards(getRandomCards());
+      var temp = getRandomCards();
+      window.renderCards.renderCards(temp);
+      window.overlayfindCard.getOverlayCard(temp);
     });
     filterDiscussed.addEventListener('click', function () {
-      window.renderCards.renderCards(getSortCommentsCards());
+      var temp1 = getSortCommentsCards();
+      window.renderCards.renderCards(temp1);
+      window.overlayfindCard.getOverlayCard(temp1);
     });
 
     filtersForm.addEventListener('click', addActiveFilter);
