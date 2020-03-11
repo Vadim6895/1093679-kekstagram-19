@@ -6,6 +6,15 @@
     var imgButtonCancel = document.querySelector('.img-upload__cancel');
     var imgUploadInput = document.querySelector('.img-upload__input');
 
+    var templateError = document.querySelector('#error');
+    var error = templateError.content.querySelector('.error');
+    var templateSuccess = document.querySelector('#success');
+    var success = templateSuccess.content.querySelector('.success');
+    var pictures = document.querySelector('.pictures');
+
+    var uploadForm = document.querySelector('.img-upload__form');
+    var imgUpload = document.querySelector('.img-upload__preview').querySelector('img');
+
     function getModalOpen() {
       var modal = document.querySelector('body');
       modal.classList.add('modal-open');
@@ -50,9 +59,6 @@
     imgUploadInput.addEventListener('change', uploadFormOpen);
 
 
-    // -----------------------module6-task3--------------------------
-    var uploadForm = document.querySelector('.img-upload__form');
-    var imgUpload = document.querySelector('.img-upload__preview').querySelector('img');
     uploadForm.addEventListener('submit', function (evt) {
       window.upload(new FormData(uploadForm), function (response) {
         uploadFormClose();
@@ -69,40 +75,13 @@
       evt.preventDefault();
     });
 
-    var pictures = document.querySelector('.pictures');
 
-    var templateError = document.querySelector('#error');
-    var error = templateError.content.querySelector('.error');
     pictures.appendChild(error);
     error.classList.add('visually-hidden');
 
-    var templateSuccess = document.querySelector('#success');
-    var success = templateSuccess.content.querySelector('.success');
     pictures.appendChild(success);
     success.classList.add('visually-hidden');
 
-    /* var errorMessage = function () {
-      error.classList.remove('visually-hidden');
-      error.addEventListener('click', function () {
-        error.classList.add('visually-hidden');
-      });
-      document.addEventListener('keydown', function () {
-        if (window.util.isEscPressed) {
-          error.classList.add('visually-hidden');
-        }
-      });
-    };
-
-    var successMessage = function () {
-      success.classList.remove('visually-hidden');
-      success.addEventListener('click', function () {
-        success.classList.add('visually-hidden');
-      });
-      document.addEventListener('keydown', function () {
-        if (window.util.isEscPressed) {
-          success.classList.add('visually-hidden');
-        }
-      });*/
 
     var onClick = function () {
       error.classList.add('visually-hidden');
@@ -131,7 +110,6 @@
       error.addEventListener('click', onClick);
       document.addEventListener('keydown', onKeyDown);
     };
-    // ----------------------------------------------------------
   };
 
   window.uploadForm = {

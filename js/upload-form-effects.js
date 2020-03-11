@@ -7,11 +7,11 @@
 
   var effectsList = document.querySelector('.effects__list');
   var imgUpload = document.querySelector('.img-upload__preview').querySelector('img');
-  // var levelLine = document.querySelector('.effect-level__line');
-  // var effectsNoneBtn = document.querySelector('.effects__preview--none');
   var effectLevelSlider = document.querySelector('.effect-level');
   var imgOverlay = document.querySelector('.img-upload__overlay');
   var effectLevelDepth = document.querySelector('.effect-level__depth');
+  var levelPinSlider = document.querySelector('.effect-level__pin');
+  var levelLine = document.querySelector('.effect-level__line');
 
   var object = {
     'effect-none': 'effects-preview--none',
@@ -29,13 +29,13 @@
 
       if (!imgUpload.className) {
         imgUpload.classList.add(object[evt.target.id]);
-        window.util.levelPinSlider.style.left = MAX_VALUE_LEVELINE;
+        levelPinSlider.style.left = MAX_VALUE_LEVELINE;
         effectLevelDepth.style.width = MAX_LEVEL_DEPTH;
       }
       if (imgUpload.className !== evt.target.id) {
         imgUpload.className = '';
         imgUpload.classList.add(object[evt.target.id]);
-        window.util.levelPinSlider.style.left = MAX_VALUE_LEVELINE;
+        levelPinSlider.style.left = MAX_VALUE_LEVELINE;
         effectLevelDepth.style.width = MAX_LEVEL_DEPTH;
       }
       if (imgUpload.className === object['effect-none']) {
@@ -67,9 +67,8 @@
 
 
   var changeEffect = function () {
-    // var dataPinSlider = cleanDataPinSlider(window.util.levelPinSlider.style.left);
-    var dataPinSlider = window.util.levelPinSlider.offsetLeft;
-    var levelLineWidth = window.util.levelLine.offsetWidth;
+    var dataPinSlider = levelPinSlider.offsetLeft;
+    var levelLineWidth = levelLine.offsetWidth;
     var saturation = (dataPinSlider / levelLineWidth) * 10;
     var saturationInvert = (dataPinSlider / levelLineWidth) * 100;
     var saturationBlur = (dataPinSlider / levelLineWidth) * 3;

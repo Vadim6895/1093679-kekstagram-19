@@ -8,10 +8,8 @@
   var imgUploadDiv = document.querySelector('.img-upload__preview');
   var STEP_VALUES = ['25', '50', '75', '100'];
   var stepValue = 3;
-  // scaleControlInput.value = '100%';
-  // imgUploadDiv.style.transform = 'scale(1.0)';
 
-  function smallScale() {
+  function getSmallScale() {
     if (scaleControlInput.value === '25%') {
       scaleControlInput.value = '25%';
     } else {
@@ -21,7 +19,7 @@
     }
   }
 
-  function biggerScale() {
+  function getBiggerScale() {
     if (scaleControlInput.value === '100%') {
       scaleControlInput.value = '100%';
     } else {
@@ -36,21 +34,15 @@
   }
 
   var addScale = function () {
-    smallScaleBtn.addEventListener('click', smallScale);
-    biggerScaleBtn.addEventListener('click', biggerScale);
+    smallScaleBtn.addEventListener('click', getSmallScale);
+    biggerScaleBtn.addEventListener('click', getBiggerScale);
     scaleControlInput.value = '100%';
     imgUploadDiv.style.transform = 'scale(1.0)';
-    /* smallScaleBtn.addEventListener('click', function () {
-      smallScale();
-    });
-    biggerScaleBtn.addEventListener('click', function () {
-      biggerScale();
-    });*/
   };
 
   var removeScale = function () {
-    smallScaleBtn.removeEventListener('click', smallScale);
-    biggerScaleBtn.removeEventListener('click', biggerScale);
+    smallScaleBtn.removeEventListener('click', getSmallScale);
+    biggerScaleBtn.removeEventListener('click', getBiggerScale);
   };
 
   window.uploadFormScale = {

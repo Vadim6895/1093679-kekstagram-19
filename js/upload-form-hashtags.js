@@ -51,14 +51,14 @@
   };
 
   var isCommentValid = function (comment) {
-    var commentArr = comment.split('');
-    if (commentArr.length > 140) {
+    var commentsArr = comment.split('');
+    if (commentsArr.length > 140) {
       return false;
     }
     return true;
   };
 
-  var validHashtag = function () {
+  var getValidHashtag = function () {
     if (!isAllHashTagsValid(window.util.hashtagInput.value)) {
       window.util.hashtagInput.setCustomValidity('Неверный формат тега');
     } else {
@@ -73,11 +73,11 @@
   };
 
   var addHashtags = function () {
-    imgUploadSubmitBtn.addEventListener('click', validHashtag);
+    imgUploadSubmitBtn.addEventListener('click', getValidHashtag);
   };
 
   var removeHashtags = function () {
-    imgUploadSubmitBtn.removeEventListener('click', validHashtag);
+    imgUploadSubmitBtn.removeEventListener('click', getValidHashtag);
   };
 
   window.uploadFormHashtags = {

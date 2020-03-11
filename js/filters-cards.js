@@ -4,7 +4,6 @@
   var addFiltersCards = function (cardsArr) {
     var MAX_RANDOM_CARDS = 10;
     var MIN_CARDS = 1;
-    // var MAX_CARDS = 25;
     var ACTIVE_CLASS_FILTER = 'img-filters__button--active';
 
     var filterDefault = document.querySelector('#filter-default');
@@ -41,7 +40,6 @@
 
 
     var getRandomCards = function () {
-      deleteCards();
       var newCards = cardsArr.slice(0, cardsArr.length);
       var randomCards = [];
 
@@ -54,7 +52,6 @@
     };
 
     var getSortCommentsCards = function () {
-      deleteCards();
       var newCards = cardsArr.slice(0, cardsArr.length);
 
       var companare = function (a, b) {
@@ -65,21 +62,32 @@
       return newCards;
     };
 
-    filterDefault.addEventListener('click', function () {
+    var getCallDefaultCards = function () {
       deleteCards();
+      // window.overlayfindCard.removeEventOnPicContainer();
       window.renderCards.renderCards(cardsArr);
       window.overlayfindCard.getOverlayCard(cardsArr);
-    });
-    filterRandom.addEventListener('click', function () {
+    };
+
+    var getCallRandomCards = function () {
+      deleteCards();
+      // window.overlayfindCard.removeEventOnPicContainer();
       var temp = getRandomCards();
       window.renderCards.renderCards(temp);
       window.overlayfindCard.getOverlayCard(temp);
-    });
-    filterDiscussed.addEventListener('click', function () {
-      var temp1 = getSortCommentsCards();
-      window.renderCards.renderCards(temp1);
-      window.overlayfindCard.getOverlayCard(temp1);
-    });
+    };
+
+    var getCallSortCommentsCards = function () {
+      deleteCards();
+      // window.overlayfindCard.removeEventOnPicContainer();
+      var temp = getSortCommentsCards();
+      window.renderCards.renderCards(temp);
+      window.overlayfindCard.getOverlayCard(temp);
+    };
+
+    filterDefault.addEventListener('click', getCallDefaultCards);
+    filterRandom.addEventListener('click', getCallRandomCards);
+    filterDiscussed.addEventListener('click', getCallSortCommentsCards);
 
     filtersForm.addEventListener('click', addActiveFilter);
 
