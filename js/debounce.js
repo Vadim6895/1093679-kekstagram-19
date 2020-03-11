@@ -16,13 +16,4 @@
     };
   };
 
-
-  /* var b = function () {
-    console.log('test');
-  }; */
-  /* window.debounce(function () {
-    b();
-  }); */
-  // как правильно вызвать функцию ? arguments, и apply пока не освоил
-
 })();

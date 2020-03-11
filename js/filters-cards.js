@@ -62,32 +62,29 @@
       return newCards;
     };
 
-    var getCallDefaultCards = function () {
+    var onDefaultFilterClick = window.getDebounce(function () {
       deleteCards();
-      // window.overlayfindCard.removeEventOnPicContainer();
       window.renderCards.renderCards(cardsArr);
-      window.overlayfindCard.getOverlayCard(cardsArr);
-    };
+      window.overlayfindCard.updateCards(cardsArr);
+    });
 
-    var getCallRandomCards = function () {
+    var onRandomFilterClick = window.getDebounce(function () {
       deleteCards();
-      // window.overlayfindCard.removeEventOnPicContainer();
       var temp = getRandomCards();
       window.renderCards.renderCards(temp);
-      window.overlayfindCard.getOverlayCard(temp);
-    };
+      window.overlayfindCard.updateCards(temp);
+    });
 
-    var getCallSortCommentsCards = function () {
+    var onSortFilterClick = window.getDebounce(function () {
       deleteCards();
-      // window.overlayfindCard.removeEventOnPicContainer();
       var temp = getSortCommentsCards();
       window.renderCards.renderCards(temp);
-      window.overlayfindCard.getOverlayCard(temp);
-    };
+      window.overlayfindCard.updateCards(temp);
+    });
 
-    filterDefault.addEventListener('click', getCallDefaultCards);
-    filterRandom.addEventListener('click', getCallRandomCards);
-    filterDiscussed.addEventListener('click', getCallSortCommentsCards);
+    filterDefault.addEventListener('click', onDefaultFilterClick);
+    filterRandom.addEventListener('click', onRandomFilterClick);
+    filterDiscussed.addEventListener('click', onSortFilterClick);
 
     filtersForm.addEventListener('click', addActiveFilter);
 
