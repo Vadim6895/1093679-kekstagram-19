@@ -8,6 +8,11 @@
   var bigPicture = document.querySelector('.big-picture');
   var commentsLoader = document.querySelector('.comments-loader');
   var pictureContainer = document.querySelector('.pictures');
+  var newComments = [];
+  var activeCard;
+  var COUNT = 5;
+  var activeCommentsCount = document.querySelector('.social__comment-count');
+  var socialButton = document.querySelector('.social__comments-loader');
 
   function deleteComments() {
     var socialComments = document.querySelector('.social__comments');
@@ -15,12 +20,6 @@
       socialComments.removeChild(socialComments.firstChild);
     }
   }
-  // -------------------------------module8-task3--------------------------------------
-  var newComments = [];
-  var activeCard;
-  var COUNT = 5;
-  var activeCommentsCount = document.querySelector('.social__comment-count');
-  var socialButton = document.querySelector('.social__comments-loader');
 
   function changeCommentsCounts() {
     var maxCommentsCount;
@@ -70,7 +69,6 @@
     getHiddenOrShowCommentsLoader();
   }
 
-  // -------------------------------------------------------------------------
   function updateCards(cards) {
     cardsArr = cards;
   }
