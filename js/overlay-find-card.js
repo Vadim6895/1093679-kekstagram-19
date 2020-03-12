@@ -87,8 +87,8 @@
   };
 
 
-  var onOverlayEscPress = function () {
-    if (window.util.isEscPressed) {
+  var onOverlayEscPress = function (evt) {
+    if (window.util.isEscPressed(evt)) {
       closeOverlayPicture();
     }
   };
@@ -99,6 +99,7 @@
     bigPicture.classList.remove('hidden');
     bodyContainer.addEventListener('keydown', onOverlayEscPress);
     btnCancelBigPic.addEventListener('click', closeOverlayPicture);
+    window.util.getModalOpen();
   }
 
   function closeOverlayPicture() {
@@ -107,6 +108,7 @@
     bigPicture.classList.add('hidden');
     bodyContainer.removeEventListener('keydown', onOverlayEscPress);
     btnCancelBigPic.removeEventListener('click', closeOverlayPicture);
+    window.util.getModalClose();
   }
   pictureContainer.addEventListener('click', getCardOnClick);
 

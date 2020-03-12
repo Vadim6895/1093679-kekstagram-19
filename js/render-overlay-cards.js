@@ -35,7 +35,6 @@
     bigPicture = picture;
     bigPicture.querySelector('.big-picture__img').querySelector('img').src = newCard.url;
     bigPicture.querySelector('.likes-count').textContent = newCard.likes;
-    // bigPicture.querySelector('.comments-count').textContent = newCard.comments.length;
   };
 
   window.renderOverlayCards = {

@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var addFiltersCards = function (cardsArr) {
+  var addFilters = function (cardsArr) {
     var MAX_RANDOM_CARDS = 10;
     var MIN_CARDS = 1;
     var ACTIVE_CLASS_FILTER = 'img-filters__button--active';
@@ -91,7 +91,7 @@
 
   };
   window.filtersCards = {
-    addFiltersCards: addFiltersCards
+    addFilters: addFilters
   };
 
 })();
