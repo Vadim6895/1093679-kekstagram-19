@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var REQUEST_TIMEOUT_MS = 10000;
+  var SUCCESS_STATUS = 200;
   var URL = 'https://js.dump.academy/kekstagram/data';
 
   function getLoadData(onSucess, onError) {
@@ -14,12 +16,12 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 10000;
+    xhr.timeout = REQUEST_TIMEOUT_MS;
 
     xhr.open('GET', URL);
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === SUCCESS_STATUS) {
         onSucess(xhr.response);
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);

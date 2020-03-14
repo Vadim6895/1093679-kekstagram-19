@@ -57,19 +57,17 @@
 
 
     uploadForm.addEventListener('submit', function (evt) {
-      window.upload(new FormData(uploadForm), getResponse);
+      window.upload(new FormData(uploadForm), showSuccess, showError);
       evt.preventDefault();
     });
 
-    function getResponse(status) {
+    function showSuccess() {
       closeUploadForm();
-
-      if (status === 200) {
-        showSuccessMessage();
-
-      } else {
-        showErrorMessage();
-      }
+      getSuccessMessage();
+    }
+    function showError() {
+      closeUploadForm();
+      getErrorMessage();
     }
 
 
@@ -98,13 +96,13 @@
     };
 
 
-    var showSuccessMessage = function () {
+    var getSuccessMessage = function () {
       success.classList.remove('visually-hidden');
       success.addEventListener('click', onClick);
       document.addEventListener('keydown', onKeyDown);
     };
 
-    var showErrorMessage = function () {
+    var getErrorMessage = function () {
       error.classList.remove('visually-hidden');
       error.addEventListener('click', onClick);
       document.addEventListener('keydown', onKeyDown);
