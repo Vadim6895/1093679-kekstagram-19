@@ -8,7 +8,7 @@
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      onSucess(xhr.response);
+      onSucess(xhr.status);
     });
 
     xhr.open('POST', URL);

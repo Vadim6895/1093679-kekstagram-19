@@ -41,16 +41,16 @@
   };
 
 
-  var addSlider = function () {
+  var initialize = function () {
     levelPinSlider.addEventListener('mousedown', moveSlider);
   };
 
-  var removeSlider = function () {
+  var reset = function () {
     levelPinSlider.removeEventListener('mousedown', moveSlider);
   };
 
   window.uploadFormSlider = {
-    addSlider: addSlider,
-    removeSlider: removeSlider
+    initialize: initialize,
+    reset: reset
   };
 })();

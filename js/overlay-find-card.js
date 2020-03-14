@@ -3,6 +3,7 @@
 (function () {
 
   var cardsArr = null;
+  var COMMENTS_COUNT = 5;
   var btnCancelBigPic = document.querySelector('.big-picture__cancel');
   var bodyContainer = document.querySelector('BODY');
   var bigPicture = document.querySelector('.big-picture');
@@ -10,7 +11,6 @@
   var pictureContainer = document.querySelector('.pictures');
   var newComments = [];
   var activeCard;
-  var COUNT = 5;
   var activeCommentsCount = document.querySelector('.social__comment-count');
   var socialButton = document.querySelector('.social__comments-loader');
 
@@ -40,14 +40,14 @@
   }
 
   function cutOutComments(card) {
-    newComments = card.comments.splice(COUNT, card.comments.length - COUNT);
+    newComments = card.comments.splice(COMMENTS_COUNT, card.comments.length - COMMENTS_COUNT);
     activeCard = card;
     changeCommentsCounts();
   }
 
   function showComments() {
     if (newComments.length !== 0) {
-      for (var i = 0; i < COUNT; i++) {
+      for (var i = 0; i < COMMENTS_COUNT; i++) {
         if (newComments.length > 0) {
           activeCard.comments.push(newComments[0]);
           newComments.splice(0, 1);

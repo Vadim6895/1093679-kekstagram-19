@@ -33,20 +33,20 @@
     }
   }
 
-  var addScale = function () {
+  var increase = function () {
     smallScaleBtn.addEventListener('click', getSmallScale);
     biggerScaleBtn.addEventListener('click', getBiggerScale);
     scaleControlInput.value = '100%';
     imgUploadDiv.style.transform = 'scale(1.0)';
   };
 
-  var removeScale = function () {
+  var decrease = function () {
     smallScaleBtn.removeEventListener('click', getSmallScale);
     biggerScaleBtn.removeEventListener('click', getBiggerScale);
   };
 
   window.uploadFormScale = {
-    addScale: addScale,
-    removeScale: removeScale
+    increase: increase,
+    decrease: decrease
   };
 })();

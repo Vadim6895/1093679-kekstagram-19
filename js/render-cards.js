@@ -2,7 +2,7 @@
 
 (function () {
 
-  var renderCards = function (cardsArr) {
+  var render = function (cardsArr) {
     var PICTURE_ID = '#picture';
     var PICTURES_CLASS = '.pictures';
     var PICTURE_COMMENTS = '.picture__comments';
@@ -36,7 +36,7 @@
 
   };
   window.renderCards = {
-    renderCards: renderCards
+    render: render
   };
 
 })();

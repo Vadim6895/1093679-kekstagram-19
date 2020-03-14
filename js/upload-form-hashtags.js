@@ -1,12 +1,15 @@
 'use strict';
 
 (function () {
+  var MAX_HASH_TAG_LENGTH = 20;
+  var MAX_HASH_TAGS_NUMBER = 5;
+  var MAX_COMMENT_LENGTH = 140;
 
   var imgUploadSubmitBtn = document.querySelector('.img-upload__submit');
   var regex = /^#[a-zA-Z0-9]+$/;
 
   var isHashTagValid = function (tag) {
-    if (tag.length > 20) {
+    if (tag.length > MAX_HASH_TAG_LENGTH) {
       return false;
     }
 
@@ -31,7 +34,7 @@
     var tags = str.split(' ');
     var tagsNoSpaces = cleanTags(tags);
 
-    if (tagsNoSpaces.length > 5) {
+    if (tagsNoSpaces.length > MAX_HASH_TAGS_NUMBER) {
       return false;
     }
     for (var index = 0; index < tagsNoSpaces.length; index++) {
@@ -52,7 +55,7 @@
 
   var isCommentValid = function (comment) {
     var commentsArr = comment.split('');
-    if (commentsArr.length > 140) {
+    if (commentsArr.length > MAX_COMMENT_LENGTH) {
       return false;
     }
     return true;
@@ -72,16 +75,16 @@
     }
   };
 
-  var addHashtags = function () {
+  var initialize = function () {
     imgUploadSubmitBtn.addEventListener('click', getValidHashtag);
   };
 
-  var removeHashtags = function () {
+  var reset = function () {
     imgUploadSubmitBtn.removeEventListener('click', getValidHashtag);
   };
 
   window.uploadFormHashtags = {
-    addHashtags: addHashtags,
-    removeHashtags: removeHashtags
+    initialize: initialize,
+    reset: reset
   };
 })();

@@ -1,10 +1,11 @@
 'use strict';
 
 (function () {
+  var MAX_RANDOM_CARDS = 10;
+  var MIN_CARDS = 1;
+  var ACTIVE_CLASS_FILTER = 'img-filters__button--active';
+
   var addFilters = function (cardsArr) {
-    var MAX_RANDOM_CARDS = 10;
-    var MIN_CARDS = 1;
-    var ACTIVE_CLASS_FILTER = 'img-filters__button--active';
 
     var filterDefault = document.querySelector('#filter-default');
     var filterRandom = document.querySelector('#filter-random');
@@ -64,21 +65,21 @@
 
     var onDefaultFilterClick = window.getDebounce(function () {
       deleteCards();
-      window.renderCards.renderCards(cardsArr);
+      window.renderCards.render(cardsArr);
       window.overlayfindCard.updateCards(cardsArr);
     });
 
     var onRandomFilterClick = window.getDebounce(function () {
       deleteCards();
       var temp = getRandomCards();
-      window.renderCards.renderCards(temp);
+      window.renderCards.render(temp);
       window.overlayfindCard.updateCards(temp);
     });
 
     var onSortFilterClick = window.getDebounce(function () {
       deleteCards();
       var temp = getSortCommentsCards();
-      window.renderCards.renderCards(temp);
+      window.renderCards.render(temp);
       window.overlayfindCard.updateCards(temp);
     });
 
