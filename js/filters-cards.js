@@ -5,7 +5,7 @@
   var MIN_CARDS = 1;
   var ACTIVE_CLASS_FILTER = 'img-filters__button--active';
 
-  var initialize = function (cardsArr) {
+  window.filtersCardsInitialize = function (cardsArr) {
 
     var filterDefault = document.querySelector('#filter-default');
     var filterRandom = document.querySelector('#filter-random');
@@ -13,9 +13,14 @@
     var filtersForm = document.querySelector('.img-filters__form');
     var picturesContainer = document.querySelector('.pictures');
 
-
     var filters = document.querySelector('.img-filters');
     filters.classList.remove('img-filters--inactive');
+
+    var filtersMap = {
+      default: 'filter-default',
+      random: 'filter-random',
+      discussed: 'filter-discussed'
+    };
 
     function getArrayRandElement(cards) {
       var randomInt = Math.floor(Math.random() * (cards.length - MIN_CARDS)) + MIN_CARDS;
@@ -64,39 +69,24 @@
     };
 
 
-    var filtersMap = {
-      default: 'filter-default',
-      random: 'filter-random',
-      discussed: 'filter-discussed'
-    };
-
     var onFilterChange = window.getDebounce(function (evt) {
+      deleteCards();
+      var temp;
       if (evt.target.id === filtersMap.default) {
-        deleteCards();
-        window.renderCards.initialize(cardsArr);
-        window.overlayfindCard.updateCards(cardsArr);
+        temp = cardsArr;
       }
       if (evt.target.id === filtersMap.random) {
-        deleteCards();
-        var temp = getRandomCards();
-        window.renderCards.initialize(temp);
-        window.overlayfindCard.updateCards(temp);
+        temp = getRandomCards();
       }
       if (evt.target.id === filtersMap.discussed) {
-        deleteCards();
         temp = getSortCommentsCards();
-        window.renderCards.initialize(temp);
-        window.overlayfindCard.updateCards(temp);
       }
+      window.renderCardsInitialize(temp);
+      window.overlayfindCardUpdate(temp);
     });
-
 
     filtersForm.addEventListener('click', onFilterChange);
     filtersForm.addEventListener('click', addActiveFilter);
-
-  };
-  window.filtersCards = {
-    initialize: initialize
   };
 
 })();

@@ -64,9 +64,6 @@
     getHiddenOrShowCommentsLoader();
   }
 
-  function updateCards(cards) {
-    cardsArr = cards;
-  }
 
   var getCardOnClick = function (evt) {
     if (evt.target.closest('A')) {
@@ -78,7 +75,6 @@
       openOverlayPicture();
     }
   };
-
 
   var onOverlayEscPress = function (evt) {
     if (window.util.isEscPressed(evt)) {
@@ -105,9 +101,8 @@
   }
   pictureContainer.addEventListener('click', getCardOnClick);
 
-
-  window.overlayfindCard = {
-    updateCards: updateCards
-
+  window.overlayfindCardUpdate = function (cards) {
+    cardsArr = cards;
   };
+
 })();

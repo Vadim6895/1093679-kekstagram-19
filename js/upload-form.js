@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var initialize = function () {
+  window.uploadFormInitialize = function () {
     var imgUploadForm = document.querySelector('.img-upload__overlay');
     var imgButtonCancel = document.querySelector('.img-upload__cancel');
     var imgUploadInput = document.querySelector('.img-upload__input');
@@ -107,9 +107,5 @@
       error.addEventListener('click', onClick);
       document.addEventListener('keydown', onKeyDown);
     };
-  };
-
-  window.uploadForm = {
-    initialize: initialize
   };
 })();
