@@ -5,7 +5,7 @@
   var SUCCESS_STATUS = 200;
   var URL = 'https://js.dump.academy/kekstagram/data';
 
-  function getLoadData(onSucess, onError) {
+  function getData(onSucess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -44,7 +44,7 @@
   }
 
   window.load = {
-    getLoadData: getLoadData,
+    getData: getData,
     showError: showError
   };
 })();

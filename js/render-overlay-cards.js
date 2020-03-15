@@ -3,7 +3,7 @@
 (function () {
   var bigPicture = document.querySelector('.big-picture');
 
-  var renderComment = function (newCard) {
+  var initializeComment = function (newCard) {
     var commentFragment = document.createDocumentFragment();
     var commentHTML = document.querySelector('.social__comments');
 
@@ -31,14 +31,14 @@
     }
   };
 
-  var renderBigCard = function (newCard, picture) {
+  var initializeBigCard = function (newCard, picture) {
     bigPicture = picture;
     bigPicture.querySelector('.big-picture__img').querySelector('img').src = newCard.url;
     bigPicture.querySelector('.likes-count').textContent = newCard.likes;
   };
 
   window.renderOverlayCards = {
-    renderComment: renderComment,
-    renderBigCard: renderBigCard
+    initializeComment: initializeComment,
+    initializeBigCard: initializeBigCard
   };
 })();

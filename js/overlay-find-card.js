@@ -22,11 +22,7 @@
   }
 
   function changeCommentsCounts() {
-    var maxCommentsCount;
-    if (newComments.length) {
-      maxCommentsCount = activeCard.comments.length;
-    }
-    maxCommentsCount = newComments.length + activeCard.comments.length;
+    var maxCommentsCount = newComments.length + activeCard.comments.length;
 
     activeCommentsCount.textContent = activeCard.comments.length + ' из ' + maxCommentsCount + ' комментариев';
   }
@@ -46,15 +42,14 @@
   }
 
   function showComments() {
-    if (newComments.length !== 0) {
-      for (var i = 0; i < COMMENTS_COUNT; i++) {
-        if (newComments.length > 0) {
-          activeCard.comments.push(newComments[0]);
-          newComments.splice(0, 1);
-        }
+    for (var i = 0; i < COMMENTS_COUNT; i++) {
+      if (newComments.length > 0) {
+        activeCard.comments.push(newComments[0]);
+        newComments.splice(0, 1);
       }
+
       deleteComments();
-      window.renderOverlayCards.renderComment(activeCard);
+      window.renderOverlayCards.initializeComment(activeCard);
       changeCommentsCounts();
     }
     getHiddenOrShowCommentsLoader();
@@ -78,8 +73,8 @@
       var a = evt.target.closest('A').dataset.index;
       deleteComments();
       cutOutComments(cardsArr[a]);
-      window.renderOverlayCards.renderBigCard(cardsArr[a], bigPicture);
-      window.renderOverlayCards.renderComment(cardsArr[a]);
+      window.renderOverlayCards.initializeBigCard(cardsArr[a], bigPicture);
+      window.renderOverlayCards.initializeComment(cardsArr[a]);
       openOverlayPicture();
     }
   };

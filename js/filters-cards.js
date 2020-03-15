@@ -5,7 +5,7 @@
   var MIN_CARDS = 1;
   var ACTIVE_CLASS_FILTER = 'img-filters__button--active';
 
-  var addFilters = function (cardsArr) {
+  var initialize = function (cardsArr) {
 
     var filterDefault = document.querySelector('#filter-default');
     var filterRandom = document.querySelector('#filter-random');
@@ -63,36 +63,40 @@
       return newCards;
     };
 
-    var onDefaultFilterClick = window.getDebounce(function () {
-      deleteCards();
-      window.renderCards.render(cardsArr);
-      window.overlayfindCard.updateCards(cardsArr);
+
+    var filtersMap = {
+      default: 'filter-default',
+      random: 'filter-random',
+      discussed: 'filter-discussed'
+    };
+
+    var onFilterChange = window.getDebounce(function (evt) {
+      if (evt.target.id === filtersMap.default) {
+        deleteCards();
+        window.renderCards.initialize(cardsArr);
+        window.overlayfindCard.updateCards(cardsArr);
+      }
+      if (evt.target.id === filtersMap.random) {
+        deleteCards();
+        var temp = getRandomCards();
+        window.renderCards.initialize(temp);
+        window.overlayfindCard.updateCards(temp);
+      }
+      if (evt.target.id === filtersMap.discussed) {
+        deleteCards();
+        temp = getSortCommentsCards();
+        window.renderCards.initialize(temp);
+        window.overlayfindCard.updateCards(temp);
+      }
     });
 
-    var onRandomFilterClick = window.getDebounce(function () {
-      deleteCards();
-      var temp = getRandomCards();
-      window.renderCards.render(temp);
-      window.overlayfindCard.updateCards(temp);
-    });
 
-    var onSortFilterClick = window.getDebounce(function () {
-      deleteCards();
-      var temp = getSortCommentsCards();
-      window.renderCards.render(temp);
-      window.overlayfindCard.updateCards(temp);
-    });
-
-    filterDefault.addEventListener('click', onDefaultFilterClick);
-    filterRandom.addEventListener('click', onRandomFilterClick);
-    filterDiscussed.addEventListener('click', onSortFilterClick);
-
+    filtersForm.addEventListener('click', onFilterChange);
     filtersForm.addEventListener('click', addActiveFilter);
-
 
   };
   window.filtersCards = {
-    addFilters: addFilters
+    initialize: initialize
   };
 
 })();

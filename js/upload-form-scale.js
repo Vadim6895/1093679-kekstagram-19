@@ -2,11 +2,11 @@
 
 (function () {
 
+  var STEP_VALUES = ['25', '50', '75', '100'];
   var smallScaleBtn = document.querySelector('.scale__control--smaller');
   var biggerScaleBtn = document.querySelector('.scale__control--bigger');
   var scaleControlInput = document.querySelector('.scale__control--value');
-  var imgUploadDiv = document.querySelector('.img-upload__preview');
-  var STEP_VALUES = ['25', '50', '75', '100'];
+  var imgUploadDiv = document.querySelector('.img-upload__preview').querySelector('img');
   var stepValue = 3;
 
   function getSmallScale() {
