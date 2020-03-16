@@ -42,7 +42,8 @@
   }
 
   function showComments() {
-    for (var i = 0; i < COMMENTS_COUNT; i++) {
+    var limit = Math.min(COMMENTS_COUNT, newComments.length);
+    for (var i = 0; i < limit; i++) {
       if (newComments.length > 0) {
         activeCard.comments.push(newComments[0]);
         newComments.splice(0, 1);

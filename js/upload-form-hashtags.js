@@ -6,7 +6,7 @@
   var MAX_COMMENT_LENGTH = 140;
 
   var imgUploadSubmitBtn = document.querySelector('.img-upload__submit');
-  var regex = /^#[a-zA-Za-яА-я0-Я0-9]+$/;
+  var regex = /^#[a-zA-Zа-яА-Я0-9]+$/;
 
   var isHashTagValid = function (tag) {
     if (tag.length > MAX_HASH_TAG_LENGTH) {
