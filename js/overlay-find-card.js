@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-
   var COMMENTS_COUNT = 5;
   var cardsArr = null;
   var btnCancelBigPic = document.querySelector('.big-picture__cancel');

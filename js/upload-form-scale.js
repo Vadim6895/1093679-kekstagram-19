@@ -38,6 +38,7 @@
     biggerScaleBtn.addEventListener('click', getBiggerScale);
     scaleControlInput.value = '100%';
     imgUploadDiv.style.transform = 'scale(1.0)';
+    stepValue = 3;
   };
 
   var decrease = function () {
