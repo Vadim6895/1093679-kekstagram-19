@@ -3,7 +3,7 @@
 (function () {
   var REQUEST_TIMEOUT_MS = 10000;
   var SUCCESS_STATUS = 200;
-  var URL = 'https://js.dump.academy/kekstagram/data';
+  var URL = 'https://javascript.pages.academy/kekstagram/data';
 
   function getData(onSucess, onError) {
     var xhr = new XMLHttpRequest();
